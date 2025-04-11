@@ -22,8 +22,8 @@ if __name__ == '__main__':
 ])
     
     # 2. Cargo datasets
-train_dir = 'C:\Users\merce\Downloads\skin_cancer_dataset\train-20240324T151905Z-001\train'
-test_dir = 'C:\Users\merce\Downloads\skin_cancer_dataset\test-20240324T151902Z-001\test'
+train_dir = 'C:/Users/merce/Downloads/skin_cancer_dataset/train-20240324T151905Z-001/train'
+test_dir = 'C:/Users/merce/Downloads/skin_cancer_dataset/test-20240324T151902Z-001/test'
 train_dataset = datasets.ImageFolder(train_dir, transforms_train)
 test_dataset = datasets.ImageFolder(test_dir, transforms_test)
 
@@ -37,12 +37,13 @@ print(num_features)  # Mostramos el número de features de entrada a la última 
 
 # Reemplazo la última capa por una capa con 2 salidas (benigno/maligno)
 model.fc = torch.nn.Linear(512, 2)
-model = model.to('cuda') #Acuordarse de no usar cpu que sino se peta
+model = model.to('cpu') #Acuordarse de no usar cpu que sino se peta
 
 # Definimos la función de pérdida
 criterion = torch.nn.CrossEntropyLoss()
 
-# Optimizador SGD con tasa de aprendizaje baja y momentum
-optimizer = torch.optim.Adam(model.fc.parameters(), lr=0.0001, momentum=0.9)
+# Optimizador antes era SGD (con tasa de aprendizaje baja y momentum), ahora Adam
+optimizer = torch.optim.Adam(model.fc.parameters(), lr=0.0001) #Esto se ha cambiado respecto al ppt.
 
+#
 
