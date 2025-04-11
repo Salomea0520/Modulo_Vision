@@ -45,5 +45,62 @@ criterion = torch.nn.CrossEntropyLoss()
 # Optimizador antes era SGD (con tasa de aprendizaje baja y momentum), ahora Adam
 optimizer = torch.optim.Adam(model.fc.parameters(), lr=0.0001) #Esto se ha cambiado respecto al ppt.
 
-#
 
+train_loss = []
+train_accuracy = []
+test_loss = []
+test_accuracy = []
+
+num_epochs = 10
+start_time = time.time()
+
+for epoch in range(num_epochs):
+    print("Epoch {} running".format(epoch))
+    """ Training Phase """
+    model.train()
+    running_loss = 0.
+    running_corrects = 0
+
+    for i, (inputs, labels) in enumerate(train_dataloader):
+        inputs = inputs.to('coda')
+        labels = labels.to('coda')
+
+        optimizer.zero_grad()
+        outputs = model(inputs)
+        _, preds = torch.max(outputs, 1)
+        loss = criterion(outputs, labels)
+
+        loss.backward()
+        optimizer.step()
+
+        running_loss += loss.item()
+        running_corrects += torch.sum(preds == labels.data).item()
+        
+        #Obtenemos las metricas de la epoch
+        epoch_loss = running_loss / len(train_dataloader)
+        epoch_acc = running_corrects / len(train_dataloader)*100.
+        
+        train_loss.append(epoch_loss)
+        train_accuracy.append(epoch_acc)
+        
+        #Muestro el progreso de la epoch
+        print("Epoch {}: Loss: {:.4f}, Acc: {:.2f}%".format(epoch, epoch_loss, epoch_acc))
+        
+        """ Validation Phase """
+        model.eval()        
+        with torch.no_grad():
+            running_loss = 0.
+            running_corrects = 0
+            for inputs, labels in test_dataloader:
+                inputs = inputs.to('coda')
+                labels = labels.to('coda')
+                outputs = model(inputs)
+                _, preds = torch.max(outputs, 1)
+                loss = criterion(outputs, labels)
+                running_loss += loss.item()
+                running_corrects += torch.sum(preds == labels.data).item()
+            epoch_loss = running_loss / len(test_dataloader)
+            epoch_acc = running_corrects / len(test_dataloader)*100.
+            
+            test_loss.append(epoch_loss)
+            test_accuracy.append(epoch_acc)
