@@ -22,8 +22,8 @@ if __name__ == '__main__':
 ])
     
     # 2. Cargo datasets
-train_dir = 'C:/Users/merce/Downloads/skin_cancer_dataset/train-20240324T151905Z-001/train'
-test_dir = 'C:/Users/merce/Downloads/skin_cancer_dataset/test-20240324T151902Z-001/test'
+train_dir = './train-20240324T151905Z-001/train'
+test_dir = './test-20240324T151902Z-001/test'
 train_dataset = datasets.ImageFolder(train_dir, transforms_train)
 test_dataset = datasets.ImageFolder(test_dir, transforms_test)
 
