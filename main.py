@@ -24,8 +24,9 @@ if __name__ == '__main__':
     
     # 2. Cargo datasets
     
-train_dir = r'C:/Users/merce/Computer_Vision1/skin_cancer_dataset/train-20240324T151905Z-001/train'
-test_dir = r'C:/Users/merce/Computer_Vision1/skin_cancer_dataset/test-20240324T151902Z-001/test'
+    
+train_dir = '/home/22061506mercedes/Computer_Vision1_v3/skin_cancer_dataset/train-20240324T151905Z-001/train'
+test_dir = '/home/22061506mercedes/Computer_Vision1_v3/skin_cancer_dataset/test-20240324T151902Z-001/test'
 train_dataset = datasets.ImageFolder(train_dir, transforms_train)
 test_dataset = datasets.ImageFolder(test_dir, transforms_test)
 
