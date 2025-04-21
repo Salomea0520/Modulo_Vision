@@ -38,7 +38,7 @@ print(num_features)  # Mostramos el número de features de entrada a la última 
 
 # Reemplazo la última capa por una capa con 2 salidas (benigno/maligno)
 model.fc = torch.nn.Linear(512, 2)
-model = model.to('cpu') #Acuordarse de no usar cpu que sino se peta
+model = model.to('cuda') #Acuordarse de no usar cpu que sino se peta
 
 # Definimos la función de pérdida
 criterion = torch.nn.CrossEntropyLoss()
@@ -63,8 +63,8 @@ for epoch in range(num_epochs):
     running_corrects = 0
 
     for i, (inputs, labels) in enumerate(train_dataloader):
-        inputs = inputs.to('coda')
-        labels = labels.to('coda')
+        inputs = inputs.to('cuda')
+        labels = labels.to('cuda')
 
         optimizer.zero_grad()
         outputs = model(inputs)
@@ -93,8 +93,8 @@ for epoch in range(num_epochs):
             running_loss = 0.
             running_corrects = 0
             for inputs, labels in test_dataloader:
-                inputs = inputs.to('coda')
-                labels = labels.to('coda')
+                inputs = inputs.to('cuda')
+                labels = labels.to('cuda')
                 outputs = model(inputs)
                 _, preds = torch.max(outputs, 1)
                 loss = criterion(outputs, labels)
