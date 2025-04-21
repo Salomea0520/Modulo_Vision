@@ -24,13 +24,14 @@ if __name__ == '__main__':
     
     # 2. Cargo datasets
     
-train_dir = './skin_cancer_dataset/test-20240324T151902Z-001/train'
-test_dir = './skin_cancer_dataset/test-20240324T151902Z-001/test' 
+train_dir = r'C:/Users/merce/Computer_Vision1/skin_cancer_dataset/train-20240324T151905Z-001/train'
+test_dir = r'C:/Users/merce/Computer_Vision1/skin_cancer_dataset/test-20240324T151902Z-001/test'
 train_dataset = datasets.ImageFolder(train_dir, transforms_train)
 test_dataset = datasets.ImageFolder(test_dir, transforms_test)
 
 train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=12, shuffle=True, num_workers=0)
 test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=12, shuffle=False, num_workers=0)
+
 
 # Cargo el modelo ResNet18 preentrenado
 model = torchvision.models.resnet18(pretrained=True)
@@ -106,3 +107,5 @@ for epoch in range(num_epochs):
             
             test_loss.append(epoch_loss)
             test_accuracy.append(epoch_acc)
+
+
