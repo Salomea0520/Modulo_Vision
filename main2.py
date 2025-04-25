@@ -114,7 +114,7 @@ print(f"Using device: {device}")
 
 # Vamos con la funcion de perdida y el optimizador y epochs
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=0.0001)
+optimizer = optim.Adam(model.fc.parameters(), lr=0.0001)
 # Define the number of epochs
 num_epochs = 13
 
