@@ -46,7 +46,7 @@ if __name__ == '__main__':
     ])
 
     # Load the dataset from the local directory
-    train_dir = '/home/21908437salomea/Modulo_Vision/Modulo_Visiontrain/'
+    train_dir = '/home/21908437salomea/Modulo_Vision/Modulo_Vision/train/'
     test_dir = '/home/21908437salomea/Modulo_Vision/Modulo_Vision/test'
     train_dataset = datasets.ImageFolder(root=train_dir, transform=transform_train)
     test_dataset = datasets.ImageFolder(root=test_dir, transform=transform_test)
